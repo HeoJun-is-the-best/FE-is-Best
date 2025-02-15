@@ -1,21 +1,21 @@
 import { Topbar } from "@/components/common/Topbar";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import React, { useState, useEffect, useRef } from "react";
+import dayjs from "dayjs";
+import React, { useState, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Add_Diary = () => {
+  const date = new Date();
+  const day = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  console.log(day);
   const navigate = useNavigate();
   const [text, setText] = useState("");
-  const textAreaRef = useRef(null);
-  const [height, setHeight] = useState(280); // 기본 높이 (70vh 정도)
-
-  // textarea 높이에 따라 부모 div 크기 조절
-  useEffect(() => {
-    if (textAreaRef.current) {
-      setHeight(Math.max(280, textAreaRef.current.scrollHeight + 20)); // 최소 280px 유지
-    }
-  }, [text]);
+  const textarea = useRef();
+  const handleResizeHeight = () => {
+    textarea.current.style.height = "auto"; // 높이 초기화
+    textarea.current.style.height = textarea.current.scrollHeight + "px";
+  };
   return (
     <>
       <div
@@ -23,16 +23,22 @@ const Add_Diary = () => {
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         <Topbar
+          title="일기 작성"
           onClick={() => navigate(-1)}
-          button={<button className="px-4 font-medium text-lg">등록</button>}
+          button={
+            <button
+              className={`font-medium text-lg ${
+                text.length > 0 ? "text-black" : "text-gray-300"
+              }`}
+            >
+              등록
+            </button>
+          }
         />
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DatePicker label="날짜 입력" />
+          <DatePicker label="일기 날짜" defaultValue={dayjs(day)} />
         </LocalizationProvider>
-        <div
-          className="w-full rounded-2xl bg-gray-100 p-6 flex transition-all"
-          style={{ minHeight: height }}
-        >
+        <div className="w-full rounded-2xl bg-gray-100 px-6 pt-6 pb-4 flex transition-all mb-12">
           <div
             className="relative w-full"
             style={{
@@ -42,17 +48,20 @@ const Add_Diary = () => {
             }}
           >
             <textarea
-              ref={textAreaRef}
-              className="w-full outline-none leading-10 resize-none bg-transparent"
+              ref={textarea}
+              onInput={handleResizeHeight}
+              className="w-full outline-none leading-10 resize-none bg-transparent min-h-[70vh] h-auto"
               value={text}
               onChange={(e) => setText(e.target.value)}
-              style={{ minHeight: "70vh", height: "auto", overflow: "hidden" }}
             />
           </div>
         </div>
       </div>
-      <div className="w-[430px] fixed bg-gray-100 p-2 bottom-0">
-        <p>260/1000</p>
+      <div className="w-[480px] flex justify-end absolute bg-gray-100 py-2 px-4 bottom-0 left-0">
+        <p className="font-medium text-sm text-gray-500">
+          {text.length}
+          <span className="text-gray-300">/1000</span>
+        </p>
       </div>
     </>
   );

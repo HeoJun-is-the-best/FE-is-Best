@@ -7,6 +7,7 @@ import {
   Plus,
   Notebook,
 } from "@/assets";
+import { useOutsideClick } from "@/hook/useOutsideClick";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -54,7 +55,7 @@ const CalendarGrid = ({ events, daysInMonth, startDay }) => {
         >
           <p className="text-gray-800 font-medium text-sm">{day}</p>
           {events[day] && (
-            <div className="text-xs text-gray-500 bg-gray-100 p-0.5 rounded-sm">
+            <div className="text-xs cursor-pointer text-gray-500 bg-gray-100 p-0.5 rounded-sm">
               <p className="font-semibold">{events[day].title}</p>
             </div>
           )}
@@ -69,6 +70,9 @@ const Calendar = () => {
   const date = new Date();
   const [year, setYear] = useState(date.getFullYear());
   const [month, setMonth] = useState(date.getMonth());
+  const outsideClickRef = useOutsideClick({
+    onClickOutside: () => setIsOpen(false),
+  });
 
   const getDaysInMonth = (year, month) =>
     new Date(year, month + 1, 0).getDate();
@@ -101,7 +105,7 @@ const Calendar = () => {
   };
   const [isListStyle, setIsListStyle] = useState(true);
   return (
-    <div className="flex w-full flex-col gap-4 relative min-h-full">
+    <div className="flex w-full flex-col gap-4 relative min-h-full overflow-hidden">
       <div className="p-2 flex justify-between w-full items-center bg-white">
         <button
           onClick={handlePrevMonth}
@@ -175,6 +179,7 @@ const Calendar = () => {
           </button>
         </div>
         <button
+          ref={outsideClickRef}
           onClick={() => setIsOpen((prev) => !prev)}
           className={`p-4 rounded-full ${isOpen ? "bg-white" : "bg-black"}`}
         >
