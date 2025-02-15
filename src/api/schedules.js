@@ -5,5 +5,5 @@ export const PostScheduleSave = async (data) => {
 };
 
 export const GetSchedule = async (data) => {
-  return await Instance.get("/schedules", data);
+  return await Instance.post("/schedules", data);
 };

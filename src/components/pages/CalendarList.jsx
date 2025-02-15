@@ -1,6 +1,6 @@
 import { Map_Pin, Timer } from "@/assets";
 
-export const CalendarList = ({ day, num, title, location, time }) => {
+export const CalendarList = ({ day, num, title, description }) => {
   const arr = { 0: "일", 1: "월", 2: "화", 3: "수", 4: "목", 5: "금", 6: "토" };
 
   const date = new Date();
@@ -31,12 +31,7 @@ export const CalendarList = ({ day, num, title, location, time }) => {
         <p className="font-medium text-lg w-full h-full">{title}</p>
         <div className="flex gap-3 min-w-fit">
           <div className="gap-1 items-center flex text-gray-400">
-            <Map_Pin size={16} />
-            <p className="font-medium text-[12px]">{location}</p>
-          </div>
-          <div className="gap-1 items-center flex text-gray-400">
-            <Timer size={16} />
-            <p className="font-medium text-[12px]">{time}</p>
+            <p className="font-medium text-[12px]">{description}</p>
           </div>
         </div>
       </div>
