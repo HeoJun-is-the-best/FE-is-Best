@@ -7,9 +7,7 @@ export const Hide = ({ size = 24, className = "", onClick }) => {
       fill="none"
       viewBox="0 0 24 24"
       onClick={onClick}
-      className={`${onClick ? "cursor-pointer" : ""} ${className} ${
-        rotate[direction]
-      }`}
+      className={`${onClick ? "cursor-pointer" : ""} ${className} }`}
     >
       <path
         stroke="color(display-p3 .4431 .4431 .4784)"
