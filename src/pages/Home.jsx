@@ -46,18 +46,27 @@ const places = [
       "https://i.pinimg.com/736x/54/06/d6/5406d6bac759851425da523ad02b7148.jpg",
     title: "대한축구협회",
     address: "서울 종로구 신문로2가 1-131",
+    lat: 33.55635,
+    lng: 126.795841,
+    description: "대한축구협회는 대한민국의 축구를 총괄하는 기관이다.",
   },
   {
     image:
       "https://i.pinimg.com/736x/54/06/d6/5406d6bac759851425da523ad02b7148.jpg",
     title: "스노볼아이엔씨 축구장",
     address: "서울 용산구 동자동 56",
+    lat: 33.55635,
+    lng: 126.795841,
+    description: "스노볼아이엔씨 축구장은 대한민국의 축구를 총괄하는 기관이다.",
   },
   {
     image:
       "https://i.pinimg.com/736x/54/06/d6/5406d6bac759851425da523ad02b7148.jpg",
     title: "이어가는 움직임",
     address: "서울 종로구 필운동 289",
+    lat: 33.55635,
+    lng: 126,
+    description: "이어가는 움직임은 대한민국의 축구를 총괄하는 기관이다.",
   },
 ];
 
