@@ -46,7 +46,7 @@ const DiaryDetail = () => {
             <More className="text-gray-500 cursor-pointer" size={24} />
           </button>
           {menuOpen && (
-            <div className="absolute overflow-hidden right-0 mt-2 w-24 bg-white border rounded-lg shadow-md">
+            <div className="absolute overflow-hidden right-0 mt-2 w-24 bg-white border border-gray-200 rounded-lg shadow-md">
               <button
                 className="w-full text-left px-4 py-2 hover:bg-gray-100"
                 onClick={() => navigate(`/edit-diary/${id}`)}
