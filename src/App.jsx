@@ -10,6 +10,7 @@ import Add_Diary from "./pages/Add_Diary";
 import Diary from "./pages/Diary";
 import DiaryDetail from "./pages/DiaryDetail";
 import MorePlace from "./pages/More_Place";
+import EditDiary from "./pages/Edit_Dairy";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/diary" element={<Diary />} />
         <Route path="/diary/:id" element={<DiaryDetail />} />
         <Route path="/place" element={<MorePlace />} />
+        <Route path="/edit-diary/:id" element={<EditDiary />} />
       </Route>
 
       <Route element={<PhoneLayout />}>

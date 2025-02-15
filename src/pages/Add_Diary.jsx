@@ -35,13 +35,21 @@ const Add_Diary = () => {
   const handleSaveDiary = () => {
     if (!titleValue || !text) return;
 
+    const storedDiaries = JSON.parse(Storage.getItem("diaries")) || [];
+
+    const newId =
+      storedDiaries.length > 0
+        ? storedDiaries[storedDiaries.length - 1].id + 1
+        : 0;
+
     const newDiary = {
+      id: newId,
       date: selectedDate.format("YYYY/MM/DD"),
       title: titleValue,
       text: text,
     };
+    console.log(newDiary);
 
-    const storedDiaries = JSON.parse(Storage.getItem("diaries")) || [];
     Storage.setItem("diaries", JSON.stringify([...storedDiaries, newDiary]));
 
     navigate("/diary");

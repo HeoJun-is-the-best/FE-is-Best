@@ -58,7 +58,7 @@ const Diary = () => {
             diaries.map((diary, index) => (
               <DiaryList
                 key={index}
-                id={index}
+                id={diary.id}
                 title={diary.title}
                 date={diary.date}
                 content={diary.text}
