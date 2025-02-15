@@ -1,10 +1,12 @@
+import { PostSignupApi } from "@/api/api";
 import { Arrow } from "@/assets";
 import Button from "@/components/common/button";
 import Input from "@/components/common/input";
 import SelectTagList from "@/components/common/selectTagList";
 import { Subject, SubjectList } from "@/constant/Subject";
 import Layout from "@/layout/Layout";
-import { useEffect, useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
@@ -14,6 +16,7 @@ const Signup = () => {
   const [data, setData] = useState({
     id: "",
     password: "",
+    name: "",
   });
   const [passwordCheck, setPasswordCheck] = useState("");
 
@@ -71,6 +74,16 @@ const Signup = () => {
     }
   };
 
+  const { mutate: signupMutate } = useMutation({
+    mutationKey: ["signup"],
+    mutationFn: PostSignupApi,
+    onSuccess: (data) => {
+      if (data) {
+        navigate("/login");
+      }
+    },
+  });
+
   const handleSignup = () => {
     if (next === 1) {
       if (passwordCheck === data.password) {
@@ -81,7 +94,16 @@ const Signup = () => {
       handleCreateInterestData();
       // interestList API 호출
     } else {
-      // 회원가입
+      const apiData = {
+        name: data.name,
+        username: data.id,
+        password: data.password,
+        topic: Object.keys(interestData).map((v) => ({
+          majorTopic: v,
+          subTopic: interestData[v],
+        })),
+      };
+      signupMutate(apiData);
     }
   };
 
@@ -112,7 +134,8 @@ const Signup = () => {
               ? !(
                   data.id.trim() &&
                   data.password.trim() &&
-                  passwordCheck.trim()
+                  passwordCheck.trim() &&
+                  data.name.trim()
                 )
               : next === 2
               ? !(etcTag.trim() ? [...tagData, etcTag.trim()] : tagData).length
@@ -139,7 +162,14 @@ const Signup = () => {
               <p className="text-[40px] font-semibold">회원가입</p>
               <p className="text-[#71717A]">너의 덕질을 도와주는, 너덕</p>
             </div>
-            <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-5">
+              <Input
+                label="이름"
+                value={data.name}
+                placeholder="이름"
+                onChange={handleChange}
+                id="name"
+              />
               <Input
                 label="아이디"
                 value={data.id}
@@ -163,7 +193,7 @@ const Signup = () => {
                 id="passwordCheck"
                 secure
               />
-              <span>
+              <span className="mt-4">
                 이미 계정이 존재하시나요?
                 <span
                   className="font-bold ml-2 cursor-pointer"
