@@ -5,11 +5,13 @@ import dayjs from "dayjs";
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
+import { RoundInput } from "@/components/common/RoundInput";
+import { Storage } from "@/storage";
 
 const Add_Diary = () => {
   const CustomDatePicker = styled(DatePicker)({
     "& .MuiOutlinedInput-root": {
-      borderRadius: "100px", // 둥글게
+      borderRadius: "100px",
       fontSize: "16px",
       paddingRight: "20px",
       paddingLeft: "8px",
@@ -17,15 +19,34 @@ const Add_Diary = () => {
       color: "#737373 !important",
     },
   });
+
   const date = new Date();
-  const day = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-  const navigate = useNavigate();
+  const [selectedDate, setSelectedDate] = useState(dayjs(date));
+  const [titleValue, setTitleValue] = useState("");
   const [text, setText] = useState("");
   const textarea = useRef();
+  const navigate = useNavigate();
+
   const handleResizeHeight = () => {
     textarea.current.style.height = "auto";
     textarea.current.style.height = textarea.current.scrollHeight + "px";
   };
+
+  const handleSaveDiary = () => {
+    if (!titleValue || !text) return;
+
+    const newDiary = {
+      date: selectedDate.format("YYYY/MM/DD"),
+      title: titleValue,
+      text: text,
+    };
+
+    const storedDiaries = JSON.parse(Storage.getItem("diaries")) || [];
+    Storage.setItem("diaries", JSON.stringify([...storedDiaries, newDiary]));
+
+    navigate("/diary");
+  };
+
   return (
     <>
       <div
@@ -37,8 +58,12 @@ const Add_Diary = () => {
           onClick={() => navigate(-1)}
           button={
             <button
+              onClick={handleSaveDiary}
+              disabled={!(text.length > 0 && titleValue.length > 0)}
               className={`font-medium text-lg ${
-                text.length > 0 ? "text-black" : "text-gray-300"
+                text.length > 0 && titleValue.length > 0
+                  ? "text-black"
+                  : "text-gray-300"
               }`}
             >
               등록
@@ -48,11 +73,16 @@ const Add_Diary = () => {
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <CustomDatePicker
             label="일기 날짜"
-            defaultValue={dayjs(day)}
+            value={selectedDate}
+            onChange={(newDate) => setSelectedDate(newDate)}
             format="YYYY/MM/DD"
-            renderInput={(params) => <TextField {...params} />}
           />
         </LocalizationProvider>
+        <RoundInput
+          value={titleValue}
+          placeholder="제목"
+          onChange={(e) => setTitleValue(e.target.value)}
+        />
         <div className="w-full rounded-2xl bg-gray-100 px-6 pt-6 pb-4 flex transition-all mb-12">
           <div
             className="relative w-full"
