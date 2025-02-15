@@ -6,8 +6,9 @@ import { Arrow, Copy } from "@/assets";
 import Modal from "../common/modal";
 import { useState } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
+import { Link } from "react-router-dom";
 
-const HomePlace = ({ places }) => {
+const HomePlace = ({ places, more }) => {
   const [selectedSubject, setSelectedSubject] = useAtom(selectedSubjectStore);
   const [isOpen, setIsOpen] = useState(false);
   const [selectPlace, setSelectPlace] = useState(null);
@@ -24,11 +25,15 @@ const HomePlace = ({ places }) => {
   return (
     <HomeLayout
       title={
-        <>
-          내 주변에 있는
-          <br />
-          {selectedSubject} 관련 장소
-        </>
+        more ? (
+          <> 이번달 주목 받는 (주제) 관련 행사</>
+        ) : (
+          <>
+            내 주변에 있는
+            <br />
+            {selectedSubject} 관련 장소
+          </>
+        )
       }
     >
       <Modal isShow={isOpen} setIsShow={setIsOpen}>
@@ -36,7 +41,7 @@ const HomePlace = ({ places }) => {
           <>
             <div className="flex gap-[17px] mb-6">
               <div>
-                <p>{selectPlace.title}</p>
+                <p>{selectPlace.name}</p>
                 <div className="flex items-center justify-between text-[#A3A3A3] mt-[3px]">
                   <p>{selectPlace.address}</p>
                   <Copy
@@ -52,17 +57,24 @@ const HomePlace = ({ places }) => {
               />
             </div>
             <Map
-              center={{ lat: selectPlace.lat, lng: selectPlace.lng }}
+              center={{ lat: selectPlace.latitude, lng: selectPlace.longitude }}
               style={{ width: "100%", height: "280px" }}
             >
               <MapMarker
-                position={{ lat: selectPlace.lat, lng: selectPlace.lng }}
+                position={{
+                  lat: selectPlace.latitude,
+                  lng: selectPlace.longitude,
+                }}
               ></MapMarker>
             </Map>
           </>
         )}
       </Modal>
-      <div className="grid grid-cols-2 gap-[28px_6px]">
+      <div
+        className={`grid gap-[28px_6px] ${
+          more ? "grid-cols-1" : "grid-cols-2"
+        }`}
+      >
         {places.map((place, index) => (
           <button
             onClick={() => {
@@ -72,21 +84,31 @@ const HomePlace = ({ places }) => {
             className="flex flex-col gap-6 cursor-pointer"
           >
             <Container
-              bgImg={place.image}
+              bgImg={place.thumbnail}
               className="w-full h-[197px] rounded-lg"
             />
             <div>
-              <p className="text-[#171717] text-start">{place.title}</p>
+              <p className="text-[#171717] text-start">{place.name}</p>
               <p className="text-[#A3A3A3] text-start text-sm mt-1">
                 {place.address}
               </p>
+              {more && (
+                <p className="mt-4 text-start text-[#737373]">
+                  {place.description}
+                </p>
+              )}
             </div>
           </button>
         ))}
-        <button className="w-[110px] p-[10px] bg-[#171717] rounded-full text-[#E5E5E5] text-[13px] flex gap-[6px] justify-center items-center self-end mt-4 justify-self-end">
-          더보기
-          <Arrow direction="right" size={16} />
-        </button>
+        {!more && (
+          <Link
+            to="/place"
+            className="w-[110px] p-[10px] bg-[#171717] rounded-full text-[#E5E5E5] text-[13px] flex gap-[6px] justify-center items-center self-end mt-4 justify-self-end"
+          >
+            더보기
+            <Arrow direction="right" size={16} />
+          </Link>
+        )}
       </div>
     </HomeLayout>
   );
