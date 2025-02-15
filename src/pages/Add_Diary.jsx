@@ -4,8 +4,19 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import styled from "@emotion/styled";
 
 const Add_Diary = () => {
+  const CustomDatePicker = styled(DatePicker)({
+    "& .MuiOutlinedInput-root": {
+      borderRadius: "100px", // 둥글게
+      fontSize: "16px",
+      paddingRight: "20px",
+      paddingLeft: "8px",
+      backgroundColor: "#f3f4f6 !important",
+      color: "#737373 !important",
+    },
+  });
   const date = new Date();
   const day = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
   const navigate = useNavigate();
@@ -35,7 +46,12 @@ const Add_Diary = () => {
           }
         />
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DatePicker label="일기 날짜" defaultValue={dayjs(day)} />
+          <CustomDatePicker
+            label="일기 날짜"
+            defaultValue={dayjs(day)}
+            format="YYYY/MM/DD"
+            renderInput={(params) => <TextField {...params} />}
+          />
         </LocalizationProvider>
         <div className="w-full rounded-2xl bg-gray-100 px-6 pt-6 pb-4 flex transition-all mb-12">
           <div
@@ -47,6 +63,7 @@ const Add_Diary = () => {
             }}
           >
             <textarea
+              placeholder="일기 내용을 입력해 주세요"
               ref={textarea}
               onInput={handleResizeHeight}
               className="w-full outline-none leading-10 resize-none bg-transparent min-h-[70vh] h-auto"
