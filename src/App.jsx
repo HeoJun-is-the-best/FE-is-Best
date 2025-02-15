@@ -8,7 +8,7 @@ import Add_Schedule from "./pages/Add_Schedule";
 import PhoneLayoutNoPadding from "@/layout/PhoneLayoutNoPadding";
 import Add_Diary from "./pages/Add_Diary";
 import Diary from "./pages/Diary";
-import DiaryDetail from "./components/pages/DiaryDetail";
+import DiaryDetail from "./pages/DiaryDetail";
 import MorePlace from "./pages/More_Place";
 
 function App() {
