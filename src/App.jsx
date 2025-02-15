@@ -6,6 +6,7 @@ import Signup from "./pages/Signup";
 import Calendar from "./pages/Calendar";
 import Add_Schedule from "./pages/Add_Schedule";
 import PhoneLayoutNoPadding from "@/layout/PhoneLayoutNoPadding";
+import Add_Diary from "./pages/Add_Diary";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/add-schedule" element={<Add_Schedule />} />
+        <Route path="/add-diary" element={<Add_Diary />} />
       </Route>
     </Routes>
   );
