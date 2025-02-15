@@ -7,18 +7,20 @@ import Calendar from "./pages/Calendar";
 import Add_Schedule from "./pages/Add_Schedule";
 import PhoneLayoutNoPadding from "@/layout/PhoneLayoutNoPadding";
 import Add_Diary from "./pages/Add_Diary";
+import Diary from "./pages/Diary";
 
 function App() {
   return (
     <Routes>
       <Route element={<PhoneLayoutNoPadding />}>
         <Route path="/" element={<Home />} />
+        <Route path="/calendar" element={<Calendar />} />
+        <Route path="/diary" element={<Diary />} />
       </Route>
 
       <Route element={<PhoneLayout />}>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/calendar" element={<Calendar />} />
         <Route path="/add-schedule" element={<Add_Schedule />} />
         <Route path="/add-diary" element={<Add_Diary />} />
       </Route>

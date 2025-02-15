@@ -2,18 +2,17 @@ import { Topbar } from "@/components/common/Topbar";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Add_Diary = () => {
   const date = new Date();
   const day = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-  console.log(day);
   const navigate = useNavigate();
   const [text, setText] = useState("");
   const textarea = useRef();
   const handleResizeHeight = () => {
-    textarea.current.style.height = "auto"; // 높이 초기화
+    textarea.current.style.height = "auto";
     textarea.current.style.height = textarea.current.scrollHeight + "px";
   };
   return (

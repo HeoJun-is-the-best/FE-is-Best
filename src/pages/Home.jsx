@@ -1,3 +1,4 @@
+import { Nav } from "@/components/common/Nav";
 import Header from "@/components/common/header";
 import HomeBanner from "@/components/pages/HomeBanner";
 import HomeEvent from "@/components/pages/HomeEvent";
@@ -72,17 +73,20 @@ const places = [
 
 const Home = () => {
   return (
-    <Layout className="relative flex flex-col">
-      <Header />
-      <HomeBanner news={news} />
-      <div className="h-[100px]" />
-      <HomeEvent events={events} />
-      <div className="h-[100px]" />
-      <HomePlace places={places} />
-      <div className="h-[56px] border-b-2 border-solid border-[#F5F5F5] w-[calc(100%_-_36px)] m-auto" />
-      <HomeMore />
-      <div className="h-[100px]" />
-    </Layout>
+    <>
+      <Layout className="relative flex flex-col">
+        <Header />
+        <HomeBanner news={news} />
+        <div className="h-[100px]" />
+        <HomeEvent events={events} />
+        <div className="h-[100px]" />
+        <HomePlace places={places} />
+        <div className="h-[56px] border-b-2 border-solid border-[#F5F5F5] w-[calc(100%_-_36px)] m-auto" />
+        <HomeMore />
+        <div className="h-[100px]" />
+      </Layout>
+      <Nav />
+    </>
   );
 };
 
