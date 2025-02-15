@@ -44,12 +44,12 @@ const Login = () => {
 
   return (
     <Layout bottom={<Button onClick={handleLogin}>로그인</Button>}>
-      <div className="grid grid-rows-[0.1fr_0.7fr_0.2fr] gap-16 w-full h-full p-[5%]">
-        <div>
+      <div className="grid grid-rows-[0.1fr_0.7fr_0.2fr] gap-16 w-full h-full">
+        <div className="mt-[100px]">
           <p className="text-[40px] font-semibold">로그인</p>
           <p className="text-[#71717A]">너의 덕질을 도와주는, 너덕</p>
         </div>
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-4">
           <Input
             label="아이디"
             value={data.username}
@@ -65,10 +65,10 @@ const Login = () => {
             id="password"
             secure
           />
-          <span>
+          <span className="mt-4 text-[#737373]">
             계정이 없으신가요?
             <span
-              className="font-bold ml-2 cursor-pointer"
+              className=" ml-2 cursor-pointer"
               onClick={() => navigate("/signup")}
             >
               회원가입

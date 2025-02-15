@@ -174,12 +174,13 @@ const Signup = () => {
     >
       {next === 1 ? (
         <>
-          <div className="grid grid-rows-[0.1fr_0.7fr_0.2fr] gap-16 w-full h-full p-[5%]">
-            <div>
+          <div className="grid grid-rows-[0.1fr_0.7fr_0.2fr] gap-16 w-full h-full">
+            <div className="mt-[100px]">
               <p className="text-[40px] font-semibold">회원가입</p>
               <p className="text-[#71717A]">너의 덕질을 도와주는, 너덕</p>
             </div>
-            <div className="flex flex-col gap-5">
+
+            <div className="flex flex-col gap-4">
               <Input
                 label="이름"
                 value={data.name}
@@ -210,15 +211,15 @@ const Signup = () => {
                 id="passwordCheck"
                 secure
               />
-              <span className="mt-4">
-                이미 계정이 존재하시나요?
+              <span className="mt-4 text-[#737373]">
+                계정이 없으신가요?
                 <span
-                  className="font-bold ml-2 cursor-pointer"
-                  onClick={() => navigate("/login")}
+                  className=" ml-2 cursor-pointer"
+                  onClick={() => navigate("/signup")}
                 >
-                  로그인
+                  회원가입
                 </span>
-              </span>
+              </span>{" "}
             </div>
           </div>
         </>
