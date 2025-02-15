@@ -1,4 +1,4 @@
-export const Copy = ({ size = 24, className }) => {
+export const Copy = ({ size = 24, className, onClick }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -7,6 +7,7 @@ export const Copy = ({ size = 24, className }) => {
       fill="none"
       viewBox="0 0 18 18"
       className={className}
+      onClick={onClick}
     >
       <path
         stroke="currentColor"

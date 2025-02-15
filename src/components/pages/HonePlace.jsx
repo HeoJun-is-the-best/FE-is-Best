@@ -2,7 +2,7 @@ import { useAtom } from "jotai";
 import HomeLayout from "../common/HomeLayout";
 import { selectedSubjectStore } from "@/store/subject";
 import newStyled from "@emotion/styled";
-import { Arrow } from "@/assets";
+import { Arrow, Copy } from "@/assets";
 import Modal from "../common/modal";
 import { useState } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
@@ -11,6 +11,15 @@ const HomePlace = ({ places }) => {
   const [selectedSubject, setSelectedSubject] = useAtom(selectedSubjectStore);
   const [isOpen, setIsOpen] = useState(false);
   const [selectPlace, setSelectPlace] = useState(null);
+
+  const handleCopyClipBoard = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      alert("클립보드에 주소가 복사되었습니다.");
+    } catch (e) {
+      alert("주소에 실패하였습니다");
+    }
+  };
 
   return (
     <HomeLayout
@@ -25,15 +34,22 @@ const HomePlace = ({ places }) => {
       <Modal isShow={isOpen} setIsShow={setIsOpen}>
         {selectPlace && (
           <>
-            <div className="flex gap-[17px]">
+            <div className="flex gap-[17px] mb-6">
               <div>
                 <p>{selectPlace.title}</p>
-                <div>
+                <div className="flex items-center justify-between text-[#A3A3A3] mt-[3px]">
                   <p>{selectPlace.address}</p>
+                  <Copy
+                    size={16}
+                    onClick={() => handleCopyClipBoard(selectPlace.address)}
+                  />
                 </div>
+                <p className="text-[#737373] mt-6">{selectPlace.description}</p>
               </div>
-              <p>{selectPlace.description}</p>
-              <img src={selectPlace.image} className="w-[122px] h-full" />
+              <img
+                src={selectPlace.image}
+                className="w-[122px] h-full rounded-lg"
+              />
             </div>
             <Map
               center={{ lat: selectPlace.lat, lng: selectPlace.lng }}
