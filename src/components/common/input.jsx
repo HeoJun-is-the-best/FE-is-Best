@@ -16,17 +16,12 @@ const Input = ({
 
   return (
     <div>
-      <span className="text-[16px] font-bold text-black">{label}</span>
-      <div
-        className={`relative flex items-center border-b w-full h-fit ${
-          !!value ? "border-black" : "border-gray300"
-        }`}
-      >
+      <div className="bg-[#F5F5F5] p-[16px_20px] rounded-full flex">
         <input
           type={(!!secure && visible) || !!!secure ? "text" : "password"}
           placeholder={placeholder}
           id={id}
-          className={`w-full h-10 outline-none text-medium20`}
+          className={`w-full outline-none text-[16px]`}
           value={value}
           onChange={onChange}
           {...props}
