@@ -1,18 +1,18 @@
 import newStyled from "@emotion/styled";
 import { useEffect, useState } from "react";
 
-const SelectTagList = ({ list, data, setData, etcTag, setEtcTag }) => {
+const SelectTagList = ({ list, data, setData, etcTag, setEtcTag, max = 3 }) => {
   const onClick = (e) => {
     const name = e.target.name;
     if (data.includes(name)) {
       setData(data.filter((item) => item !== name));
     } else {
       if (etcTag.trim().length > 0) {
-        if (data.length < 2) {
+        if (data.length < max - 1) {
           setData([...data, name]);
         }
       } else {
-        if (data.length < 3) {
+        if (data.length < max) {
           setData([...data, name]);
         }
       }
