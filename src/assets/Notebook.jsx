@@ -6,7 +6,7 @@ export const Notebook = ({ size = 24, className }) => {
       height={size}
       fill="none"
       viewBox="0 0 32 32"
-      className={className}
+      className={`${className}`}
     >
       <path
         stroke="currentColor"

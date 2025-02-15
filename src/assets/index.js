@@ -11,3 +11,4 @@ export * from "./Plus";
 export * from "./Map_Pin";
 export * from "./Timer";
 export * from "./Plus";
+export * from "./Bell";
