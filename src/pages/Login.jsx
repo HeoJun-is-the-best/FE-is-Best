@@ -21,9 +21,9 @@ const Login = () => {
   const { mutate: loginMutate } = useMutation({
     mutationKey: ["login"],
     mutationFn: PostLoginApi,
-    onSuccess: ({ id, username }) => {
-      Storage.setItem("id", id);
-      Storage.setItem("username", username);
+    onSuccess: ({ data }) => {
+      Storage.setItem("id", data.id);
+      Storage.setItem("username", data.username);
       navigate("/");
     },
     onError: (error) => {
