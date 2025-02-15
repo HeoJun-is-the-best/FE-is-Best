@@ -37,6 +37,7 @@ const SelectTagList = ({ list, data, setData, etcTag, setEtcTag, max = 3 }) => {
               : "bg-[#F5F5F5] text-[#262626]"
           } rounded-full
           p-[10px_14px]
+          text-[14px]
           cursor-pointer`}
           key={v}
         >

@@ -93,6 +93,8 @@ const Signup = () => {
       setNext(3);
       handleCreateInterestData();
       // interestList API 호출
+    } else if (next == 3) {
+      setNext(4);
     } else {
       const apiData = {
         name: data.name,
@@ -114,10 +116,10 @@ const Signup = () => {
           <div className="flex justify-between">
             <Arrow onClick={() => setNext(next - 1)} />
             <div className="flex gap-1">
-              {next === 3 &&
+              {(next === 3 || next === 4) &&
                 (etcTag.trim() ? [...tagData, etcTag.trim()] : tagData).map(
                   (v) => (
-                    <span className="bg-[#262626] text-[#F5F5F5] rounded-full p-[10px_14px] cursor-pointer">
+                    <span className="text-[14px] bg-[#262626] text-[#F5F5F5] rounded-full p-[10px_14px]">
                       {v}
                     </span>
                   )
@@ -222,7 +224,7 @@ const Signup = () => {
             />
           </div>
         </div>
-      ) : (
+      ) : next === 3 ? (
         <div className="pb-[100px] flex flex-col justify-center h-full">
           {(etcTag.trim() ? [...tagData, etcTag.trim()] : tagData).map(
             (v, i) => (
@@ -243,6 +245,31 @@ const Signup = () => {
               </div>
             )
           )}
+        </div>
+      ) : (
+        <div className="pt-[240px] mb-[26px]">
+          <p className="text-[20px] font-semibold mb-[26px]">
+            홍길동님의 최애는
+            <br />
+            {(etcTag.trim() ? [...tagData, etcTag.trim()] : tagData).join(", ")}
+            입니다.
+          </p>
+          <div className="flex flex-wrap gap-[2px_4px]">
+            {Object.keys(interestData).map((v, i) => (
+              <>
+                {interestData[v].map((data) => (
+                  <span className="bg-[#262626] text-[#F5F5F5] rounded-full p-[10px_14px] text-[14px]">
+                    {data}
+                  </span>
+                ))}
+                {interestEtcTags[v] && (
+                  <span className="bg-[#262626] text-[#F5F5F5] rounded-full p-[10px_14px] text-[14px]">
+                    {interestEtcTags[v]}
+                  </span>
+                )}
+              </>
+            ))}
+          </div>
         </div>
       )}
     </Layout>
