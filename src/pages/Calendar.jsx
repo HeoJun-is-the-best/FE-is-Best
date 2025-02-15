@@ -40,7 +40,7 @@ const CalendarGrid = ({ events }) => {
   const daysArray = Array.from({ length: daysInMonth }, (_, i) => i + 1);
 
   return (
-    <div className="grid grid-cols-7 gap-y-4 p-2 w-full">
+    <div className="grid grid-cols-7 gap-y-4 w-full">
       {["일", "월", "화", "수", "목", "금", "토"].map((day) => (
         <div key={day} className="text-center font-medium text-gray-500">
           {day}
