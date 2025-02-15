@@ -1,7 +1,7 @@
-import axios, { AxiosError, AxiosInstance } from "axios";
+import axios from "axios";
 import { Storage } from "../storage/index";
 
-const baseUrl = `http://severurl~~`;
+const baseUrl = `http://165.140.23.12:31111/api/v1`;
 
 export const Instance = axios.create({
   baseURL: baseUrl,

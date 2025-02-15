@@ -32,20 +32,6 @@ const Signup = () => {
   const handleChange = (e) =>
     setData({ ...data, [e.target.id]: e.target.value });
 
-  const handleSignup = () => {
-    if (next === 1) {
-      if (passwordCheck === data.password) {
-        setNext(2);
-      }
-    } else if (next === 2) {
-      setNext(3);
-      handleCreateInterestData();
-      // interestList API 호출
-    } else {
-      // 회원가입
-    }
-  };
-
   // 3단계 함수
   const handleInterestChange = (tag, selectedInterest) => {
     setInterestData((prev) => ({
@@ -82,6 +68,20 @@ const Signup = () => {
       );
       setInterestData(() => nextInterestData);
       setInterestEtcTags(() => newInterestEtcTags);
+    }
+  };
+
+  const handleSignup = () => {
+    if (next === 1) {
+      if (passwordCheck === data.password) {
+        setNext(2);
+      }
+    } else if (next === 2) {
+      setNext(3);
+      handleCreateInterestData();
+      // interestList API 호출
+    } else {
+      // 회원가입
     }
   };
 
