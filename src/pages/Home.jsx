@@ -114,9 +114,9 @@ const Home = () => {
       <Layout className="relative flex flex-col">
         <Header />
         {news && <HomeBanner news={news} />}
-        <div className="h-[100px]" />
+        <div className="h-[20px]" />
         <HomeEvent events={events} />
-        <div className="h-[100px]" />
+        <div className="h-[30px]" />
         {places && <HomePlace places={places} />}
         <div className="h-[56px] border-b-2 border-solid border-[#F5F5F5] w-[calc(100%_-_36px)] m-auto" />
         {moreImage && <HomeMore moreImage={moreImage.image_urls} />}
