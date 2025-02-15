@@ -32,6 +32,7 @@ const Calendar = () => {
     setMonth((prev) => (prev === 11 ? 0 : prev + 1));
     if (month === 11) setYear((prev) => prev + 1);
   };
+
   const events = {
     8: {
       title: "김어진 한국 방문",

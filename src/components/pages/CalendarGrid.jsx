@@ -11,7 +11,6 @@ export const CalendarGrid = ({
   const nowDay = date.getDate();
   const storedDiaries = JSON.parse(localStorage.getItem("diaries")) || [];
 
-  // 각 연, 월, 일 정보를 분리해서 배열로 저장
   const diaryDates = storedDiaries.map((diary) => {
     const [diaryYear, diaryMonth, diaryDay] = diary.date.split("/").map(Number);
     return { diaryYear, diaryMonth, diaryDay };
@@ -33,7 +32,6 @@ export const CalendarGrid = ({
           <div key={`empty-${i}`} className="h-20" />
         ))}
         {daysArray.map((day) => {
-          // 해당 날짜에 일기가 있는지 확인
           const hasDiary = diaryDates.some(
             ({ diaryYear, diaryMonth, diaryDay }) =>
               diaryYear === year && diaryMonth === month + 1 && diaryDay === day
