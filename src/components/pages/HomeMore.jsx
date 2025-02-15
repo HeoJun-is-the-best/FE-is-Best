@@ -4,7 +4,7 @@ import { selectedSubjectStore, subjectStore } from "@/store/subject";
 import { Arrow } from "@/assets";
 import newStyled from "@emotion/styled";
 
-const HomeMore = () => {
+const HomeMore = ({ moreImage }) => {
   const [selectedSubject, setSelectedSubject] = useAtom(selectedSubjectStore);
   const [subjectList, setSubjectList] = useAtom(subjectStore);
 
@@ -18,9 +18,9 @@ const HomeMore = () => {
           {subjectList.map(
             (i) =>
               i.title === selectedSubject &&
-              i.subTopics.map((j) => (
+              i.subTopics.map((j, idx) => (
                 <Container
-                  bgImg="https://i.pinimg.com/736x/3d/24/ff/3d24ffc760bb39551b687ca294adc072.jpg"
+                  bgImg={moreImage[idx]}
                   className="w-[194px] h-[146px] p-4 rounded-3xl shrink-0 flex justify-between flex-col text-white"
                 >
                   <p className="text-sm opacity-80">
@@ -35,6 +35,9 @@ const HomeMore = () => {
                 </Container>
               ))
           )}
+          <div className="w-[194px] h-[146px] p-4 rounded-3xl shrink-0 flex justify-center items-center flex-col text-black bg-[#F5F5F5]">
+            <p>관심사 변경하기</p>
+          </div>
         </div>
       </div>
     </div>
