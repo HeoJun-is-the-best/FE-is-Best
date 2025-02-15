@@ -36,10 +36,14 @@ const Days = ({ day, num, title, location, time }) => {
   );
 };
 
-const CalendarGrid = ({ events, daysInMonth, startDay }) => {
+const CalendarGrid = ({ events, daysInMonth, startDay, year, month }) => {
+  const date = new Date();
+  const nowYear = date.getFullYear();
+  const nowMonth = date.getMonth();
+  const nowDay = date.getDate();
   const daysArray = Array.from({ length: daysInMonth }, (_, i) => i + 1);
   return (
-    <div className="grid grid-cols-7 gap-y-4 w-full">
+    <div className="grid grid-cols-7 gap-y-10 w-full">
       {["일", "월", "화", "수", "목", "금", "토"].map((day) => (
         <div key={day} className="text-center font-medium text-gray-500">
           {day}
@@ -51,9 +55,17 @@ const CalendarGrid = ({ events, daysInMonth, startDay }) => {
       {daysArray.map((day) => (
         <div
           key={day}
-          className="border-t border-gray-100 h-20 p-2 flex flex-col justify-between"
+          className="border-t border-gray-100 h-20 p-2 flex flex-col justify-between gap-2"
         >
-          <p className="text-gray-800 font-medium text-sm">{day}</p>
+          <div
+            className={`${
+              year == nowYear && month == nowMonth && nowDay == day
+                ? "bg-gray-900 text-white"
+                : "text-gray-800"
+            } w-6 flex justify-center items-center rounded-full p-0.5`}
+          >
+            <p className=" font-medium text-sm">{day}</p>
+          </div>
           {events[day] && (
             <div className="text-xs cursor-pointer text-gray-500 bg-gray-100 p-0.5 rounded-sm">
               <p className="font-semibold">{events[day].title}</p>
@@ -150,6 +162,8 @@ const Calendar = () => {
           events={events}
           daysInMonth={daysInMonth}
           startDay={startDay}
+          year={year}
+          month={month}
         />
       )}
       <div className="bg-black flex flex-col p-0.5 absolute bottom-0 right-0 rounded-full">

@@ -22,13 +22,13 @@ const Add_Schedule = () => {
           <div className="w-full flex flex-col gap-2">
             <span className="text-[16px] font-bold text-black">날짜</span>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker label="날짜 입력" />
+              <DatePicker />
             </LocalizationProvider>
           </div>
           <div className="w-full flex flex-col gap-2">
             <span className="text-[16px] font-bold text-black">시간</span>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <MobileTimePicker label="시간 입력" />
+              <MobileTimePicker />
             </LocalizationProvider>
           </div>
         </div>

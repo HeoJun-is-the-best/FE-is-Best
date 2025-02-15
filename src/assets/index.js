@@ -13,3 +13,6 @@ export * from "./Timer";
 export * from "./Plus";
 export * from "./Bell";
 export * from "./Copy";
+export * from "./Fill_Calendar";
+export * from "./Fill_Home";
+export * from "./Fill_Notebook";
