@@ -1,4 +1,5 @@
 import { PostSignupApi } from "@/api/api";
+import { PostRecommendPlaceApi } from "@/api/topics";
 import { Arrow } from "@/assets";
 import Button from "@/components/common/button";
 import Input from "@/components/common/input";
@@ -6,7 +7,7 @@ import SelectTagList from "@/components/common/selectTagList";
 import { Subject, SubjectList } from "@/constant/Subject";
 import Layout from "@/layout/Layout";
 import { useMutation } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
@@ -84,15 +85,29 @@ const Signup = () => {
     },
   });
 
+  const { mutate: PostRecommendPlaceMutate } = useMutation({
+    mutationKey: ["interestList"],
+    mutationFn: PostRecommendPlaceApi,
+    onSuccess: ({ data }) => {
+      setNext(3);
+      setInterestList(data.subTopic);
+    },
+  });
+
   const handleSignup = () => {
     if (next === 1) {
       if (passwordCheck === data.password) {
         setNext(2);
       }
     } else if (next === 2) {
-      setNext(3);
       handleCreateInterestData();
-      // interestList API 호출
+      if (etcTag.trim()) {
+        PostRecommendPlaceMutate({
+          majorTopic: etcTag.trim(),
+        });
+      } else {
+        setNext(3);
+      }
     } else if (next == 3) {
       setNext(4);
     } else {

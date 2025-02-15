@@ -1,9 +1,12 @@
+import { GetMyTopicsApi } from "@/api/topics";
 import { Arrow_Chevron, Bell } from "@/assets";
+import { Storage } from "@/storage";
 import {
   selectedSubjectStore,
   selectedSubjectTopicStore,
   subjectStore,
 } from "@/store/subject";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -31,12 +34,28 @@ const Header = () => {
     setIsOpen(false);
   };
 
+  const { data } = useQuery({
+    queryKey: ["getMyTopic"],
+    queryFn: () => GetMyTopicsApi(Storage.getItem("id")),
+  });
+
+  useEffect(() => {
+    if (data) {
+      setSubjectList(data.data.topics);
+    }
+  }, [data]);
+  useEffect(() => {
+    if (!subjectList) return;
+    setSelectedSubject(subjectList[0].title);
+    setSelectedSubjectTopic("");
+  }, [subjectList]);
+
   return (
     <div className="w-full absolute top-0 left-0 h-[62px] flex justify-between items-center pl-5 pr-5  z-10 bg-white">
       <div className="flex gap-1 relative">
         <p className="text-lg">
           관심 분야{" "}
-          <b>
+          <b className="ml-1">
             {selectedSubject}{" "}
             {selectedSubjectTopic && `- ${selectedSubjectTopic}`}
           </b>
