@@ -14,3 +14,12 @@
     cursor: pointer;
   }
 }
+
+.noscroll {
+  overflow: scroll;
+  scrollbar-width: none; /* Firefox에서 스크롤바 숨기기 */
+}
+
+.noscroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari에서 스크롤바 숨기기 */
+}
