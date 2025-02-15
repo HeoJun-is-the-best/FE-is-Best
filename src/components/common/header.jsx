@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [subjectList, setSubjectList] = useAtom(subjectStore);
   const [selectedSubjectTopic, setSelectedSubjectTopic] = useAtom(
     selectedSubjectTopicStore
