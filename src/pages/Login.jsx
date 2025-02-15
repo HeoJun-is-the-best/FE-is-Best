@@ -1,12 +1,15 @@
+import { PostLoginApi } from "@/api/api";
 import Button from "@/components/common/button";
 import Input from "@/components/common/input";
 import Layout from "@/layout/Layout";
+import { Storage } from "@/storage";
+import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [data, setData] = useState({
-    id: "",
+    username: "",
     password: "",
   });
 
@@ -15,7 +18,29 @@ const Login = () => {
   const handleChange = (e) =>
     setData({ ...data, [e.target.id]: e.target.value });
 
-  const handleLogin = () => {};
+  const { mutate: loginMutate } = useMutation({
+    mutationKey: ["login"],
+    mutationFn: PostLoginApi,
+    onSuccess: ({ id, username }) => {
+      Storage.setItem("id", id);
+      Storage.setItem("username", username);
+      navigate("/");
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
+  const handleLogin = () => {
+    if (data.username.length < 6 || data.username.length > 12) {
+      alert("아이디는 6자 이상 12자 이하여야 합니다.");
+      return;
+    }
+    if (data.password.length < 8 || data.password.length > 16) {
+      alert("비밀번호는 8자 이상 16자 이하여야 합니다.");
+      return;
+    }
+    loginMutate(data);
+  };
 
   return (
     <Layout bottom={<Button onClick={handleLogin}>로그인</Button>}>
@@ -27,10 +52,10 @@ const Login = () => {
         <div className="flex flex-col gap-8">
           <Input
             label="아이디"
-            value={data.id}
+            value={data.username}
             placeholder="아이디 (6~12)"
             onChange={handleChange}
-            id="id"
+            id="username"
           />
           <Input
             label="비밀번호"
