@@ -2,19 +2,11 @@ import { Arrow } from "@/assets";
 import Button from "@/components/common/button";
 import Input from "@/components/common/input";
 import SelectTagList from "@/components/common/selectTagList";
+import { Subject, SubjectList } from "@/constant/Subject";
 import Layout from "@/layout/Layout";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const tagList = [
-  "스포츠",
-  "음악",
-  "K-POP",
-  "디자인",
-  "건축",
-  "일러스트레이터",
-  "코딩",
-];
 const Signup = () => {
   const [next, setNext] = useState(1);
 
@@ -29,6 +21,12 @@ const Signup = () => {
   const [tagData, setTagData] = useState([]);
   const [etcTag, setEtcTag] = useState("");
 
+  // 3단계
+  const [interestData, setInterestData] = useState({});
+  const [interestEtcTags, setInterestEtcTags] = useState({});
+  // API 로 받아온 관심사 리스트
+  const [interestList, setInterestList] = useState([]);
+
   const navigate = useNavigate();
 
   const handleChange = (e) =>
@@ -41,14 +39,71 @@ const Signup = () => {
       }
     } else if (next === 2) {
       setNext(3);
+      handleCreateInterestData();
+      // interestList API 호출
     } else {
       // 회원가입
     }
   };
 
+  // 3단계 함수
+  const handleInterestChange = (tag, selectedInterest) => {
+    setInterestData((prev) => ({
+      ...prev,
+      [tag]: selectedInterest,
+    }));
+  };
+  const handleInterestEtcTagChange = (tag, value) => {
+    setInterestEtcTags((prev) => ({
+      ...prev,
+      [tag]: value,
+    }));
+  };
+  const handleCreateInterestData = () => {
+    if (etcTag.trim()) {
+      const nextInterestData = tagData.reduce(
+        (acc, tag) => ({ ...acc, [tag]: [] }),
+        {}
+      );
+      const newInterestEtcTags = tagData.reduce(
+        (acc, tag) => ({ ...acc, [tag]: "" }),
+        {}
+      );
+      setInterestData(() => ({ ...nextInterestData, [etcTag]: [] }));
+      setInterestEtcTags(() => ({ ...newInterestEtcTags, [etcTag]: "" }));
+    } else {
+      const nextInterestData = tagData.reduce(
+        (acc, tag) => ({ ...acc, [tag]: [] }),
+        {}
+      );
+      const newInterestEtcTags = tagData.reduce(
+        (acc, tag) => ({ ...acc, [tag]: "" }),
+        {}
+      );
+      setInterestData(() => nextInterestData);
+      setInterestEtcTags(() => newInterestEtcTags);
+    }
+  };
+
   return (
     <Layout
-      top={next !== 1 && <Arrow onClick={() => setNext(next - 1)} />}
+      top={
+        next !== 1 && (
+          <div className="flex justify-between">
+            <Arrow onClick={() => setNext(next - 1)} />
+            <div className="flex gap-1">
+              {next === 3 &&
+                (etcTag.trim() ? [...tagData, etcTag.trim()] : tagData).map(
+                  (v) => (
+                    <span className="bg-[#262626] text-[#F5F5F5] rounded-full p-[10px_14px] cursor-pointer">
+                      {v}
+                    </span>
+                  )
+                )}
+            </div>
+          </div>
+        )
+      }
       bottom={
         <Button
           onClick={handleSignup}
@@ -59,7 +114,18 @@ const Signup = () => {
                   data.password.trim() &&
                   passwordCheck.trim()
                 )
-              : !(etcTag.trim() ? [...tagData, etcTag.trim()] : tagData).length
+              : next === 2
+              ? !(etcTag.trim() ? [...tagData, etcTag.trim()] : tagData).length
+              : next === 3
+              ? ![
+                  ...(etcTag.trim()
+                    ? [...tagData, etcTag.trim()]
+                    : tagData
+                  ).map(
+                    (v) => [...interestData[v], ...interestEtcTags[v]].length
+                  ),
+                ].every((v) => v)
+              : false
           }
         >
           {next === 1 ? "다음" : next === 2 ? "주제 등록" : "회원가입"}
@@ -118,16 +184,36 @@ const Signup = () => {
               주제를 선택해주세요
             </p>
             <SelectTagList
-              list={tagList}
+              list={SubjectList}
               data={tagData}
-              setData={setTagData}
+              setData={(v) => setTagData(v)}
               etcTag={etcTag}
-              setEtcTag={setEtcTag}
+              setEtcTag={(v) => setEtcTag(v)}
             />
           </div>
         </div>
       ) : (
-        <>{next}</>
+        <div className="pb-[100px] flex flex-col justify-center h-full">
+          {(etcTag.trim() ? [...tagData, etcTag.trim()] : tagData).map(
+            (v, i) => (
+              <div className="mt-[48px]" key={i}>
+                <p className="text-[24px] font-semibold mb-[26px]">
+                  {v} 와(과) 관련된
+                  <br />
+                  관심사를 선택해주세요
+                </p>
+                <SelectTagList
+                  max={2}
+                  list={Subject[v] || interestList}
+                  data={interestData[v]}
+                  etcTag={interestEtcTags[v]}
+                  setData={(value) => handleInterestChange(v, value)}
+                  setEtcTag={(value) => handleInterestEtcTagChange(v, value)}
+                />
+              </div>
+            )
+          )}
+        </div>
       )}
     </Layout>
   );

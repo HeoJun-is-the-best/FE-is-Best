@@ -24,9 +24,9 @@ export const Arrow = ({
     >
       <path
         stroke="color(display-p3 .0902 .0902 .0902)"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
         d="m3 12 5 5m-5-5 5-5m-5 5h18"
       />
     </svg>
