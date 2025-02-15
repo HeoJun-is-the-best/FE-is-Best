@@ -9,6 +9,7 @@ import PhoneLayoutNoPadding from "@/layout/PhoneLayoutNoPadding";
 import Add_Diary from "./pages/Add_Diary";
 import Diary from "./pages/Diary";
 import DiaryDetail from "./components/pages/DiaryDetail";
+import MorePlace from "./pages/More_Place";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/diary" element={<Diary />} />
         <Route path="/diary/:id" element={<DiaryDetail />} />
+        <Route path="/place" element={<MorePlace />} />
       </Route>
 
       <Route element={<PhoneLayout />}>
