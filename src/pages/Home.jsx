@@ -72,6 +72,7 @@ const Home = () => {
       <HomePlace places={places} />
       <div className="h-[56px] border-b-2 border-solid border-[#F5F5F5] w-[calc(100%_-_36px)] m-auto" />
       <HomeMore />
+      <div className="h-[100px]" />
     </Layout>
   );
 };

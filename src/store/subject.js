@@ -1,6 +1,7 @@
 import { atom } from "jotai";
 
 export const selectedSubjectStore = atom("프로그래밍");
+export const selectedSubjectTopicStore = atom("");
 export const subjectStore = atom([
   {
     id: 1,

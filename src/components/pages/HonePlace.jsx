@@ -3,10 +3,12 @@ import HomeLayout from "../common/HomeLayout";
 import { selectedSubjectStore } from "@/store/subject";
 import newStyled from "@emotion/styled";
 import { Arrow } from "@/assets";
+import Modal from "../common/modal";
+import { useState } from "react";
 
 const HomePlace = ({ places }) => {
   const [selectedSubject, setSelectedSubject] = useAtom(selectedSubjectStore);
-
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <HomeLayout
       title={
@@ -17,6 +19,9 @@ const HomePlace = ({ places }) => {
         </>
       }
     >
+      <Modal isShow={isOpen} setIsShow={setIsOpen}>
+        asdf
+      </Modal>
       <div className="grid grid-cols-2 gap-[28px_6px]">
         {places.map((place, index) => (
           <div className="flex flex-col gap-6">
