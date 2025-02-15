@@ -1,4 +1,4 @@
-export const Calendar = ({ size = 24, className }) => {
+export const Calendar_Days = ({ size = 24, className }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -6,10 +6,10 @@ export const Calendar = ({ size = 24, className }) => {
       height={size}
       fill="none"
       viewBox="0 0 32 32"
-      className={className}
+      className={`${className}`}
     >
       <path
-        stroke="color(display-p3 .4431 .4431 .4784)"
+        stroke="currentColor"
         stroke-linecap="round"
         stroke-linejoin="round"
         stroke-width="2"

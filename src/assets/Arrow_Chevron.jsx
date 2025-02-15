@@ -1,4 +1,4 @@
-export const Arrow = ({
+export const Arrow_Chevron = ({
   size = 24,
   className = "",
   onClick,
@@ -27,7 +27,7 @@ export const Arrow = ({
         stroke-linecap="round"
         stroke-linejoin="round"
         stroke-width="2"
-        d="m3 12 5 5m-5-5 5-5m-5 5h18"
+        d="m15 19-7-7 7-7"
       />
     </svg>
   );

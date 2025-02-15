@@ -9,7 +9,7 @@ export const Notebook = ({ size = 24, className }) => {
       className={className}
     >
       <path
-        stroke="color(display-p3 .4431 .4431 .4784)"
+        stroke="currentColor"
         stroke-linecap="round"
         stroke-linejoin="round"
         stroke-width="2"

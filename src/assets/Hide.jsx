@@ -10,7 +10,7 @@ export const Hide = ({ size = 24, className = "", onClick }) => {
       className={`${onClick ? "cursor-pointer" : ""} ${className} }`}
     >
       <path
-        stroke="color(display-p3 .4431 .4431 .4784)"
+        stroke="currentColor"
         stroke-linecap="round"
         stroke-linejoin="round"
         stroke-width="2"
