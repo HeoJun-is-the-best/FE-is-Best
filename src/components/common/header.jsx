@@ -1,5 +1,5 @@
 import { GetMyTopicsApi } from "@/api/topics";
-import { Arrow_Chevron, Bell } from "@/assets";
+import { Arrow_Chevron, Bell, Logo } from "@/assets";
 import { Storage } from "@/storage";
 import {
   selectedSubjectStore,
@@ -22,13 +22,11 @@ const Header = () => {
   const nav = useNavigate();
 
   const onClickSubject = (title) => {
-    nav(`?subject=${title}`);
     setSelectedSubject(title);
     setSelectedSubjectTopic("");
     setIsOpen(false);
   };
   const onClickSubjectTopic = (title, sub) => {
-    nav(`?subject=${title}?sub=${sub}`);
     setSelectedSubject(title);
     setSelectedSubjectTopic(sub);
     setIsOpen(false);
@@ -56,8 +54,8 @@ const Header = () => {
         <p className="text-lg">
           관심 분야{" "}
           <b className="ml-1">
-            {selectedSubject}{" "}
-            {selectedSubjectTopic && `- ${selectedSubjectTopic}`}
+            {selectedSubject}
+            {selectedSubjectTopic && `/${selectedSubjectTopic}`}
           </b>
         </p>
         <div>
@@ -94,7 +92,7 @@ const Header = () => {
           )}
         </div>
       </div>
-      <Bell />
+      <img src={Logo} className="h-[24px]" />
     </div>
   );
 };

@@ -8,7 +8,7 @@ import { useState } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import { Link } from "react-router-dom";
 
-const HomePlace = ({ places, more }) => {
+const HomePlace = ({ places, more, title, noMore }) => {
   const [selectedSubject, setSelectedSubject] = useAtom(selectedSubjectStore);
   const [isOpen, setIsOpen] = useState(false);
   const [selectPlace, setSelectPlace] = useState(null);
@@ -26,12 +26,12 @@ const HomePlace = ({ places, more }) => {
     <HomeLayout
       title={
         more ? (
-          <> 이번달 주목 받는 (주제) 관련 행사</>
+          <> 이번달 주목 받는 {title} 관련 행사</>
         ) : (
           <>
             내 주변에 있는
             <br />
-            {selectedSubject} 관련 장소
+            {title} 관련 장소
           </>
         )
       }
@@ -51,10 +51,12 @@ const HomePlace = ({ places, more }) => {
                 </div>
                 <p className="text-[#737373] mt-6">{selectPlace.description}</p>
               </div>
-              <img
-                src={selectPlace.image}
-                className="w-[122px] h-full rounded-lg"
-              />
+              <div className="w-[180px]">
+                <img
+                  src={selectPlace.thumbnail}
+                  className=" h-full  object-cover rounded-lg"
+                />
+              </div>
             </div>
             <Map
               center={{ lat: selectPlace.latitude, lng: selectPlace.longitude }}
@@ -100,7 +102,7 @@ const HomePlace = ({ places, more }) => {
             </div>
           </button>
         ))}
-        {!more && (
+        {!noMore && !more && (
           <Link
             to="/place"
             className="w-[110px] p-[10px] bg-[#171717] rounded-full text-[#E5E5E5] text-[13px] flex gap-[6px] justify-center items-center self-end mt-4 justify-self-end"

@@ -11,6 +11,7 @@ import Diary from "./pages/Diary";
 import DiaryDetail from "./pages/DiaryDetail";
 import MorePlace from "./pages/More_Place";
 import EditDiary from "./pages/Edit_Dairy";
+import MoreEvent from "./pages/More_Event";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/diary/:id" element={<DiaryDetail />} />
         <Route path="/place" element={<MorePlace />} />
         <Route path="/edit-diary/:id" element={<EditDiary />} />
+        <Route path="/event" element={<MoreEvent />} />
       </Route>
 
       <Route element={<PhoneLayout />}>
