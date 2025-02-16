@@ -30,7 +30,7 @@ const HomeBanner = ({ news }) => {
   ));
 
   return (
-    <>
+    <div className="w-[430px]">
       <Carousel
         showArrows={false}
         autoPlay={true}
@@ -41,7 +41,7 @@ const HomeBanner = ({ news }) => {
       >
         {renderSlides}
       </Carousel>
-    </>
+    </div>
   );
 };
 

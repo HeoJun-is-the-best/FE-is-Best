@@ -1,8 +1,8 @@
 const Layout = ({ top, bottom, children }) => {
   return (
-    <div className="h-full flex flex-col noscroll">
+    <div className="h-[805px] flex flex-col noscroll">
       {top}
-      <main className="flex-1">{children}</main>
+      <main className="h-full noscroll">{children}</main>
       {bottom}
     </div>
   );

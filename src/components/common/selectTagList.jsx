@@ -23,7 +23,7 @@ const SelectTagList = ({ list, data, setData, etcTag, setEtcTag, max = 3 }) => {
 
   useEffect(() => {
     const textLength = etcTag.length;
-    const width = Math.max(textLength * 18, 28);
+    const width = Math.max(textLength * 16, 28);
     setInputWidth(width);
   }, [etcTag]);
 

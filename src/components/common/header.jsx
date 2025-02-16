@@ -49,7 +49,7 @@ const Header = () => {
   }, [subjectList]);
 
   return (
-    <div className="w-full absolute top-0 left-0 h-[62px] flex justify-between items-center pl-5 pr-5  z-10 bg-white">
+    <div className="w-full fixed top-0 left-0 h-[62px] flex justify-between items-center pl-5 pr-5  z-10 bg-white">
       <div className="flex gap-1 relative">
         <p className="text-lg">
           관심 분야{" "}

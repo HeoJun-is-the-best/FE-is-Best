@@ -1,13 +1,19 @@
 import { useAtom } from "jotai";
 import HomeLayout from "../common/HomeLayout";
-import { selectedSubjectStore, subjectStore } from "@/store/subject";
+import {
+  selectedSubjectStore,
+  selectedSubjectTopicStore,
+  subjectStore,
+} from "@/store/subject";
 import { Arrow } from "@/assets";
 import newStyled from "@emotion/styled";
 
 const HomeMore = ({ moreImage }) => {
   const [selectedSubject, setSelectedSubject] = useAtom(selectedSubjectStore);
   const [subjectList, setSubjectList] = useAtom(subjectStore);
-
+  const [selectedSubjectTopic, setSelectedSubjectTopic] = useAtom(
+    selectedSubjectTopicStore
+  );
   return (
     <div className="flex flex-col gap-[10px]">
       <p className="text-lg font-semibold p-[18px]">
@@ -22,6 +28,7 @@ const HomeMore = ({ moreImage }) => {
                 <Container
                   bgImg={moreImage[idx]}
                   className="w-[194px] h-[146px] p-4 rounded-3xl shrink-0 flex justify-between flex-col text-white"
+                  onClick={() => setSelectedSubjectTopic(j.majorTopicTitle)}
                 >
                   <p className="text-sm opacity-80">
                     {j.majorTopicTitle}에 대한 최신

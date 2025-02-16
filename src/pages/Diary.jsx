@@ -20,7 +20,11 @@ const Diary = () => {
       return diaryDate.year() === year && diaryDate.month() + 1 === month;
     });
 
-    setDiaries(filteredDiaries);
+    const sortedDiaries = filteredDiaries.sort((a, b) => {
+      return dayjs(a.date).isBefore(dayjs(b.date)) ? -1 : 1;
+    });
+
+    setDiaries(sortedDiaries);
   }, [year, month]);
 
   const handlePrevMonth = () => {

@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "@/pages/Home";
 import PhoneLayout from "@/layout/phoneLayout";
 import Login from "@/pages/Login";
@@ -12,27 +12,31 @@ import DiaryDetail from "./pages/DiaryDetail";
 import MorePlace from "./pages/More_Place";
 import EditDiary from "./pages/Edit_Dairy";
 import MoreEvent from "./pages/More_Event";
+import ScrollToTop from "./components/common/scrollTop";
 
 function App() {
   return (
-    <Routes>
-      <Route element={<PhoneLayoutNoPadding />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/calendar" element={<Calendar />} />
-        <Route path="/diary" element={<Diary />} />
-        <Route path="/diary/:id" element={<DiaryDetail />} />
-        <Route path="/place" element={<MorePlace />} />
-        <Route path="/edit-diary/:id" element={<EditDiary />} />
-        <Route path="/event" element={<MoreEvent />} />
-      </Route>
+    <BrowserRouter>
+      {/* <ScrollToTop /> */}
+      <Routes>
+        <Route element={<PhoneLayoutNoPadding />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/calendar" element={<Calendar />} />
+          <Route path="/diary" element={<Diary />} />
+          <Route path="/diary/:id" element={<DiaryDetail />} />
+          <Route path="/place" element={<MorePlace />} />
+          <Route path="/edit-diary/:id" element={<EditDiary />} />
+          <Route path="/event" element={<MoreEvent />} />
+        </Route>
 
-      <Route element={<PhoneLayout />}>
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/add-schedule" element={<Add_Schedule />} />
-        <Route path="/add-diary" element={<Add_Diary />} />
-      </Route>
-    </Routes>
+        <Route element={<PhoneLayout />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/add-schedule" element={<Add_Schedule />} />
+          <Route path="/add-diary" element={<Add_Diary />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

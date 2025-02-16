@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 const Calendar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const date = new Date();
-  const [year, setYear] = useState(date.getFullYear());
+  const [year, setYear] = useState(date.getFullYear() - 2);
   const [month, setMonth] = useState(date.getMonth());
   const outsideClickRef = useOutsideClick({
     onClickOutside: () => setIsOpen(false),

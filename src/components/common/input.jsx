@@ -24,9 +24,9 @@ const Input = ({
           className={`w-full outline-none text-[16px]`}
           value={value}
           onChange={onChange}
+          autocomplete="off"
           {...props}
         />
-
         {!!secure && (
           <div className="cursor-pointer">
             {visible ? (

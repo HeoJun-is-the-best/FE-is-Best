@@ -117,7 +117,9 @@ const Signup = () => {
         password: data.password,
         topic: Object.keys(interestData).map((v) => ({
           majorTopic: v,
-          subTopic: interestData[v],
+          subTopic: interestEtcTags[v].trim()
+            ? [...interestData[v], interestEtcTags[v].trim()]
+            : [...interestData[v]],
         })),
       };
       signupMutate(apiData);

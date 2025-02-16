@@ -12,7 +12,7 @@ export const Nav = () => {
   ];
 
   return (
-    <div className="w-[480px] fixed bottom-0 gap-12 px-6 bg-gray-50 h-20 flex justify-center border-t border-gray-100">
+    <div className="w-[430px] fixed bottom-0 gap-12 px-6 bg-gray-50 h-20 flex justify-center border-t border-gray-100">
       {navIcons.map(({ icon, title, path }) => {
         const isActive = location.pathname === path;
         return (

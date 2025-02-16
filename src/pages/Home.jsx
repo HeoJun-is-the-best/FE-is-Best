@@ -69,7 +69,7 @@ const Home = () => {
       <Layout className="relative flex flex-col">
         <Header />
         {!selectedSubjectTopic && news && <HomeBanner news={news} />}
-        <div className="h-[20px]" />
+        <div className="h-[20px] mt-[60px]" />
         {events && (
           <HomeEvent
             events={events}
